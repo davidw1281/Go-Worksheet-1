@@ -10,23 +10,10 @@ func calculateNextState(p golParams, world [][]byte) [][]byte {
 
 	for i := 0; i < p.imageHeight; i++ {
 		for j := 0; j < p.imageWidth; j++ {
-			iBehind := i - 1
-			iAhead := i + 1
-			jBehind := j - 1
-			jAhead := j + 1
-
-			if i == 0 {
-				iBehind = p.imageHeight - 1
-			} else if i == p.imageHeight-1 {
-				iAhead = 0
-			}
-
-			if j == 0 {
-				jBehind = p.imageWidth - 1
-			} else if j == p.imageWidth-1 {
-				jAhead = 0
-
-			}
+			iBehind := (i - 1 + p.imageHeight) % p.imageHeight
+			iAhead := (i + 1 + p.imageHeight) % p.imageHeight
+			jBehind := (j - 1 + p.imageWidth) % p.imageWidth
+			jAhead := (j + 1 + p.imageWidth) % p.imageWidth
 
 			neighbourSum := int(world[iBehind][jBehind]) + int(world[iBehind][j]) + int(world[iBehind][jAhead]) + int(world[i][jBehind]) + int(world[i][jAhead]) + int(world[iAhead][jBehind]) + int(world[iAhead][j]) + int(world[iAhead][jAhead])
 			liveNeighbours := neighbourSum / 255
