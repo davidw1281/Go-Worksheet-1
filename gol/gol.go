@@ -2,9 +2,9 @@ package main
 
 func calculateNextState(p golParams, world [][]byte) [][]byte {
 
-	newWorld := make([][]byte, len(world))
+	newWorld := make([][]byte, p.imageHeight)
 	for i := range world {
-		newWorld[i] = make([]byte, len(world[0]))
+		newWorld[i] = make([]byte, p.imageWidth)
 		copy(newWorld[i], world[i])
 	}
 
